@@ -1,0 +1,72 @@
+<div>
+    <form>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td><input type="number" id="age"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="email" id="mail"></td>
+            </tr>
+        </table>
+    </form>
+    <button onclick="add()">Submit</button>
+</div>
+<div>
+    <table id="table2" border="1">
+        <tr>
+            <td>S.no</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>E-mail</td>
+            <td>Notes</td>
+        </tr>
+    </table>
+</div>
+<script>
+    let sno = 1;
+    function add() {
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var mail = document.getElementById("mail").value;
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var tr2 = document.createElement("tr");
+        var table2 = document.getElementById("table2");
+
+        tr2.innerHTML = `
+            <td>${sno++}</td>
+            <td>${name}</td>
+            <td>${age}</td>
+            <td>${gender ? gender.value : ''}</td>
+            <td>${mail}</td>
+            <td><input><button onclick="save(this)">Ok</button><button onclick="remove(this)">-</button></td>
+        `;
+
+        table2.append(tr2);
+        document.querySelector('form').reset();
+    }
+
+    function remove(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+
+    function save(button) {
+        var input = button.previousSibling;
+        var value = input.value;
+        button.parentNode.innerHTML = value;
+    }
+</script>

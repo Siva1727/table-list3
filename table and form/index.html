@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form and Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-seri   f;
+            margin: 20px;
+        }
+        form {
+            background-color: rgb(217, 217, 217);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+            max-width: 400px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 2px solid black; /* Changed border color to black */
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 150px; /* Adjusted margin-left */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <form> <!--  Added 'event' parameter to append function -->
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" id="name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>
+                    <input id="age" type="number" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" id="male" value="Male" required> <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="Female"> <label for="female">Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td>E-Mail</td>
+                <td>
+                    <input id="mail" type="email" required>
+                </td>
+            </tr>
+        </table><br>
+        <button type="submit" onclick="append()">Submit</button>
+    </form>
+</div>
+
+<div>
+    <table id="table2" border="2">
+        <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>E-mail</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+let serialNumber = 1;
+
+function append() {
+    event.preventDefault(); // Prevent form submission
+
+    // Get form values
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
+    var mail = document.getElementById("mail").value;
+    var gender = document.querySelector('input[name="gender"]:checked');
+
+    // Create a new row and add it to the table
+    var table2 = document.getElementById("table2");
+    var tr2 = document.createElement("tr");
+
+    tr2.innerHTML = `
+        <td>${serialNumber++}</td>
+        <td>${name}</td>
+        <td>${age}</td>
+        <td>${gender.value}</td>
+        <td>${mail}</td>
+    `;
+
+    table2.appendChild(tr2);
+
+    // Clear the form
+    document.querySelector('form').reset();
+
+    return false; // To prevent form submission
+}
+</script>
+
+</body>
+</html>
